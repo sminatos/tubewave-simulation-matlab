@@ -2,9 +2,10 @@ function [pt_gen_up,pt_gen_low]=function_3LIonov(wvec,Rhof,Rho_0,Rho_1,Kf,Vp_0,V
                                      B,Porosity,PHI_IONOV,K,...
                                      kpvec_0,kpvec_1,kTvec_0,kTvec_1,Ap0,Ap1);
 
-%Ionov+plane wave
-%3L model (Top=Bottom)
-%exact solution
+% Ionov and Maximov (1996) : 10.1111/j.1365-246X.1996.tb05643.x
+% Minato et al. (2021) : arXiv:2112.03410 [physics.geo-ph]
+% 3-layer model (Top layer and Bottom layer have the same properties)
+% Exact solution
 
 varrho__f=Rhof;
 varrho__1=Rho_1;

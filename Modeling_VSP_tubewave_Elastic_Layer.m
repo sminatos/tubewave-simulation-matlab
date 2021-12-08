@@ -4,7 +4,7 @@
 % s.minato-1@tudelft.nl
 %
 % This code calculates pressure waveforms at a borehole due to
-% normally incidence plane P wave (vertical seismic profiling, VSP).
+% a normally incident plane P wave (vertical seismic profiling, VSP).
 % The borehole is a circular column filled with fluid, 
 % and it is embedded in horizontally layered media. 
 %
@@ -17,7 +17,10 @@
 %      : "B" is the Skempton coefficient. 
 %      : "B" is either calculated from given Vp and Vs (not recommended) or PE.B
 
-%% This version of the code uses modeling parameters designed for a medium with two elastic half-spaces
+%===========================================================================
+% This version uses modeling parameters designed for a simulation of
+% two elastic half-spaces and a borehole with a constant radius
+%===========================================================================
 
 clear all
 close all
@@ -70,8 +73,8 @@ wvec_proc=wvec_org(1:nw_proc); %frequency vector (radian) where
                                %wavefield is calculated
 
 %Note: Here I define the Ricker wavelet for the source signature. 
-%    : The Haskel method for an elastic wavefield considers this source signature  
-%    : as tzz. See below.
+%    : The propagator matrix method for an elastic wavefield considers 
+%    : this source signature as tzz. See below in the 1D propagator matrix method.
 
 % Creating a source wavelet
 f0=200; % center frequency (Hz)
@@ -134,7 +137,7 @@ zn_proc=zn_org+shift_z; %
 
 %================================================================
 %   1D Propagator-matrix method: Calculation of elastic wavefield
-%   due to normal incidence plane P wave
+%   due to a normally incident plane P wave
 %================================================================
 
 uEvec_allfreq=zeros(2,n,nw_proc);%Upgoing and Downgoing potential amplitudes [Un;Dn] for each layer and all frequencies. "E" stands for Elastic wavefield.
@@ -692,8 +695,8 @@ figure;imagesc(zvec_rec,tvec,data_B);colorbar;
 title("Borehole response")
 xlabel('Receiver depth (m)');ylabel('Time (s)')
 
-
 %%Comparison with analytical solutions
+disp('Comparison with analytical solutions...')
 
 %+-10.05m (pressure)
 irec_H1=find(abs(zvec_rec+10.05)<0.001);
